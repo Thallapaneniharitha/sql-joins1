@@ -1,0 +1,79 @@
+mysql> create table employee2(id int,name varchar(200),depid varchar(200));
+Query OK, 0 rows affected (0.39 sec)
+mysql> insert into employee2 values(1,'haritha','1');
+Query OK, 1 row affected (0.09 sec)
+mysql> insert into employee2 values(1,'prasanthi','2');
+Query OK, 1 row affected (0.13 sec)
+mysql> insert into employee2 values(2,'susmitha','3');Query OK, 1 row affected (0.09 sec)
+mysql> insert into employee2 values(3,'saritha','4');
+Query OK, 1 row affected (0.12 sec)
+mysql> insert into employee2 values(4,'sarada','5');
+Query OK, 1 row affected (0.16 sec)
+mysql> select * from employee2;
++------+-----------+-------+
+| id   | name      | depid |
++------+-----------+-------+
+|    1 | haritha   | 1     |
+|    1 | prasanthi | 2     |
+|    2 | susmitha  | 3     |
+|    3 | saritha   | 4     |
+|    4 | sarada    | 5     |
++------+-----------+-------+
+5 rows in set (0.00 sec)
+mysql> create table department(depid varchar(200),dep_name varchar(200));
+Query OK, 0 rows affected (0.29 sec)
+mysql> insert into department values('1','manager');
+Query OK, 1 row affected (0.18 sec)
+mysql> insert into department values('2','HR');
+Query OK, 1 row affected (0.11 sec)
+mysql> select * from department;
++-------+----------+
+| depid | dep_name |
++-------+----------+
+| 1     | manager  |
+| 2     | HR       |
++-------+----------+
+2 rows in set (0.00 sec)
+mysql> select id,name,department.depid,dep_name from employee2 join department on employee2.depid=department.depid;
++------+-----------+-------+----------+
+| id   | name      | depid | dep_name |
++------+-----------+-------+----------+
+|    1 | haritha   | 1     | manager  |
+|    1 | prasanthi | 2     | HR       |
++------+-----------+-------+----------+
+2 rows in set (0.01 sec)
+mysql> select id,name,department.depid,dep_name from employee2 left join department on employee2.depid=department.depid;
++------+-----------+-------+----------+
+| id   | name      | depid | dep_name |
++------+-----------+-------+----------+
+|    1 | haritha   | 1     | manager  |
+|    1 | prasanthi | 2     | HR       |
+|    2 | susmitha  | NULL  | NULL     |
+|    3 | saritha   | NULL  | NULL     |
+|    4 | sarada    | NULL  | NULL     |
++------+-----------+-------+----------+
+5 rows in set (0.03 sec)
+mysql> select id,name,department.depid,dep_name from employee2 right join department on employee2.depid=department.depid;
++------+-----------+-------+----------+
+| id   | name      | depid | dep_name |
++------+-----------+-------+----------+
+|    1 | haritha   | 1     | manager  |
+|    1 | prasanthi | 2     | HR       |
++------+-----------+-------+----------+
+2 rows in set (0.00 sec)
+mysql> select id,name,department.depid,dep_name from employee2 inner join department on employee2.depid=department.depid;
++------+-----------+-------+----------+
+| id   | name      | depid | dep_name |
++------+-----------+-------+----------+
+|    1 | haritha   | 1     | manager  |
+|    1 | prasanthi | 2     | HR       |
++------+-----------+-------+----------+
+2 rows in set (0.00 sec)
+mysql> select id,name,department.depid,dep_name from employee2 cross join department on employee2.depid=department.depid;
++------+-----------+-------+----------+
+| id   | name      | depid | dep_name |
++------+-----------+-------+----------+
+|    1 | haritha   | 1     | manager  |
+|    1 | prasanthi | 2     | HR       |
++------+-----------+-------+----------+
+2 rows in set (0.00 sec)
